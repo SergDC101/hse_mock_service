@@ -12,6 +12,7 @@ services:
     networks:
       - postgres
 
+
   pgadmin:
     container_name: pgadmin
     restart: always

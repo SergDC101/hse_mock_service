@@ -1,10 +1,13 @@
 fastapi
+fastapi-users
+fastapi_users_db_sqlalchemy
 uvicorn
 python-jose[cryptography]
 passlib[bcrypt]
 python-multipart
 sqlalchemy
 alembic
-psycopg2-binary
 pymongo
 dotenv
+asyncpg
+psycopg2-binary
