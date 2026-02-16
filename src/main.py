@@ -1,3 +1,4 @@
+import uvicorn
 from fastapi import FastAPI, Depends
 from src.auth.base_config import auth_backend, current_user, fastapi_users
 
@@ -26,3 +27,6 @@ def protected_route(user: User = Depends(current_user)):
 @app.get("/unprotected-route")
 def protected_route():
     return f"Hello, anonyam"
+
+if __name__ == '__main__':
+    uvicorn.run("main:app", host="localhost", port=8086, reload=True)
