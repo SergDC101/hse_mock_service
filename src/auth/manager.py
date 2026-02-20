@@ -5,6 +5,8 @@ from fastapi_users import BaseUserManager, IntegerIDMixin, exceptions, models, s
 
 from src.auth.models import User
 from src.auth.utils import get_user_db
+from src.config import MONGO_LINK, MONGO_BASE
+from src.mongo import MongoManager
 
 SECRET = "SECRET"
 
@@ -14,7 +16,9 @@ class UserManager(IntegerIDMixin, BaseUserManager[User, int]):
     verification_token_secret = SECRET
 
     async def on_after_register(self, user: User, request: Optional[Request] = None):
-        print(f"User {user.id} has registered.")
+        # создаем коллекцию в монго с ником пользователя
+        with MongoManager(MONGO_LINK, MONGO_BASE) as mongo:
+            mongo.create_collection_if_not_exists(user.username)
 
     async def create(
             self,
